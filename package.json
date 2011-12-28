@@ -1,0 +1,20 @@
+{
+  "author": "Ilkka Laukkanen <ilkka.s.laukkanen@gmail.com> (http://ilkka.github.com)",
+  "name": "todojs",
+  "description": "Todo.txt manager in Node.js",
+  "version": "0.1.0",
+  "homepage": "http://github.com/ilkka/todojs",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ilkka/todojs.git"
+  },
+  "main": "todo",
+  "scripts": {
+    "test": "testcmd"
+  },
+  "engines": {
+    "node": "~0.6.6"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
