@@ -7,6 +7,11 @@ class Todo
     @done = true
     @text = 'x ' + @text.replace /^\(B\)\s+/, ""
 
+  undo: ->
+    @done = false
+    @text = @text.replace /^x\s+/, ''
+
+
 class Model
   constructor: ->
     @todos = []

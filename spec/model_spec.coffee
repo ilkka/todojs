@@ -44,3 +44,10 @@ describe 'model', ->
 
         it 'should prepend "x "', ->
           expect(model.by_id(1).text).toEqual('x second')
+
+        describe 'when marking an item as undone', ->
+          beforeEach ->
+            model.by_id(1).undo()
+
+          it 'should remove the "x "', ->
+            expect(model.by_id(1).text).toEqual('second')
