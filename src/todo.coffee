@@ -2,14 +2,19 @@ class Todo
   constructor: (text) ->
     @done = false
     @text = text
+    @priority_regex = /^\([A-Z]\)\s+/
 
   do: ->
     @done = true
-    @text = 'x ' + @text.replace /^\(B\)\s+/, ""
+    @text = 'x ' + @text.replace @priority_regex, ""
 
   undo: ->
     @done = false
     @text = @text.replace /^x\s+/, ''
+
+  set_priority: (priority) ->
+    priobit =  if priority? then '(' + priority + ') ' else ''
+    @text = priobit + @text.replace @priority_regex, ''
 
 
 class Model
