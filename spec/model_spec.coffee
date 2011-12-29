@@ -19,7 +19,25 @@ describe 'model', ->
       expect(model.by_id(0) instanceof Error).toBeTruthy()
 
     describe 'after adding one element', ->
-      it 'should have a length of one', ->
+      beforeEach ->
         model.add('foobar')
+
+      it 'should have a length of one', ->
         expect(model.length()).toEqual(1)
 
+      it 'should give the element when accessing it', ->
+        expect(model.by_id(0)).toEqual('foobar')
+
+      it 'should give an error when accessing elements past the end', ->
+        expect(model.by_id(1) instanceof Error).toBeTruthy()
+
+    describe 'after adding some elements', ->
+      beforeEach ->
+        model.add item for item in ['first', '(B) second', '(A) third']
+
+      describe 'when marking an item as done', ->
+        beforeEach ->
+          model.by_id(1).done = true
+
+        it 'should remove the priority', ->
+          expect(model.by_id(1)).toNotMatch(/\(B\)/)
