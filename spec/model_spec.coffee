@@ -31,13 +31,13 @@ describe 'model', ->
       it 'should give an error when accessing elements past the end', ->
         expect(model.by_id(1) instanceof Error).toBeTruthy()
 
-    describe 'after adding some elements', ->
+    describe 'after adding some real todos', ->
       beforeEach ->
-        model.add item for item in ['first', '(B) second', '(A) third']
+        model.add(new Todo.Todo(item)) for item in ['first', '(B) second', '(A) third']
 
       describe 'when marking an item as done', ->
         beforeEach ->
-          model.by_id(1).done = true
+          model.by_id(1).do()
 
         it 'should remove the priority', ->
-          expect(model.by_id(1)).toNotMatch(/\(B\)/)
+          expect(model.by_id(1).text).toNotMatch(/\(B\)/)

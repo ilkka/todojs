@@ -1,3 +1,12 @@
+class Todo
+  constructor: (text) ->
+    @done = false
+    @text = text
+
+  do: ->
+    @done = true
+    @text = @text.replace /^\(B\)\s+/, ""
+
 class Model
   constructor: ->
     @todos = []
@@ -12,3 +21,4 @@ class Model
     @todos.push item
 
 exports.Model = Model
+exports.Todo = Todo
