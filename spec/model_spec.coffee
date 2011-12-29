@@ -12,4 +12,4 @@ describe 'model', ->
       expect((new Todo.Model).length()).toEqual(0)
 
     it 'should give an error when trying to access elements', ->
-      expect(-> (new Todo.Model).by_id(0)).toThrow()
+      expect((new Todo.Model).by_id(0) instanceof Error).toBeTruthy()
