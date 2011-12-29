@@ -41,3 +41,6 @@ describe 'model', ->
 
         it 'should remove the priority', ->
           expect(model.by_id(1).text).toNotMatch(/\(B\)/)
+
+        it 'should prepend "x "', ->
+          expect(model.by_id(1).text).toEqual('x second')

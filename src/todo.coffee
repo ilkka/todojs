@@ -5,7 +5,7 @@ class Todo
 
   do: ->
     @done = true
-    @text = @text.replace /^\(B\)\s+/, ""
+    @text = 'x ' + @text.replace /^\(B\)\s+/, ""
 
 class Model
   constructor: ->
