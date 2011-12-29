@@ -7,4 +7,7 @@ class Model
 
   length: -> @todos.length
 
+  add: (item) ->
+    @todos.push item
+
 exports.Model = Model
