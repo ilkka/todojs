@@ -10,7 +10,7 @@
   },
   "main": "todo",
   "scripts": {
-    "test": "testcmd"
+    "test": "vows"
   },
   "engines": {
     "node": "~0.6.6"
