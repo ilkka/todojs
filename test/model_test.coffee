@@ -14,7 +14,6 @@ vows
       'is not done by default': (topic) ->
         assert.equal false, topic.done
 
-      ''
   .addBatch
     'when empty':
       topic: new todo.Model
