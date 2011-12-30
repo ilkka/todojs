@@ -5,24 +5,54 @@ todo = require '../lib/todo'
 vows
   .describe('a model')
   .addBatch
-    'item':
+    'a todo item':
       topic: new todo.Todo('foobar')
 
       'has a text attribute': (topic) ->
-        assert.equal 'foobar', topic.text
+        assert.equal topic.text, 'foobar'
 
       'is not done by default': (topic) ->
-        assert.equal false, topic.done
+        assert.equal topic.done, false
+
+    'a todo that is marked as done':
+      topic: new todo.Todo('foobar').do()
+
+      'has an x prepended to it': (topic) ->
+        assert.equal topic.text, 'x foobar'
+
+    'a todo that is marked as undone':
+      topic: new todo.Todo('x foobar').undo()
+
+      'has the x removed': (topic) ->
+        assert.equal topic.text, 'foobar'
+
+    'a todo with a priority':
+      topic: new todo.Todo('foobar').set_priority('A')
+
+      'has the priority prepended in parentheses': (topic) ->
+        assert.equal topic.text, '(A) foobar'
+
+    'a todo with the priority set to null':
+      topic: new todo.Todo('(A) foobar').set_priority(null)
+
+      "doesn't have the parentheses": (topic) ->
+        assert.equal topic.text, 'foobar'
+
+    'a todo with the priority changed':
+      topic: new todo.Todo('(A) foobar').set_priority('B')
+
+      'has the new priority in the text': (topic) ->
+        assert.equal topic.text, '(B) foobar'
 
   .addBatch
-    'when empty':
+    'an empty todo model':
       topic: new todo.Model
       
       'has a length of zero': (topic) ->
-        assert.equal 0, topic.length()
+        assert.equal topic.length(), 0
 
       'returns an error when accessing elements': (topic) ->
-        assert.equal true, topic.by_id(0) instanceof Error
+        assert.equal topic.by_id(0) instanceof Error, true
 
     'with one element':
       topic: ->
@@ -31,13 +61,12 @@ vows
         m
 
       'has a length of one': (topic) ->
-        assert.equal 1, topic.length()
+        assert.equal topic.length(), 1
 
       'returns the element when accessing it': (topic) ->
-        assert.equal 'foobar', topic.by_id(0).text
+        assert.equal topic.by_id(0).text, 'foobar'
 
       'returns an error when accessing past the end': (topic) ->
-        assert.equal true, topic.by_id(1) instanceof Error
-
+        assert.equal topic.by_id(1) instanceof Error, true
 
   .export(module)

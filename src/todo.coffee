@@ -7,14 +7,18 @@ class Todo
   do: ->
     @done = true
     @text = 'x ' + @text.replace @priority_regex, ""
+    @
 
   undo: ->
     @done = false
     @text = @text.replace /^x\s+/, ''
+    @
 
   set_priority: (priority) ->
+    return new Error('Done items cannot be prioritized') if @done
     priobit =  if priority? then '(' + priority + ') ' else ''
     @text = priobit + @text.replace @priority_regex, ''
+    @
 
 
 class Model
