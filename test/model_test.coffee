@@ -44,6 +44,12 @@ vows
       'has the new priority in the text': (topic) ->
         assert.equal topic.text, '(B) foobar'
 
+    'a todo with some text prepended to it':
+      topic: new todo.Todo('(A) foobar').prepend('baz baz')
+
+      'has the text inserted after the priority': (topic) ->
+        assert.equal topic.text, '(A) baz baz foobar'
+
   .addBatch
     'an empty todo model':
       topic: new todo.Model

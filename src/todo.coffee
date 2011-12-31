@@ -1,8 +1,8 @@
-class Todo
+exports.Todo = class Todo
   constructor: (text) ->
     @done = false
     @text = text
-    @priority_regex = /^\([A-Z]\)\s+/
+    @priority_regex = /^(\([A-Z]\))\s+/
 
   do: ->
     @done = true
@@ -20,8 +20,12 @@ class Todo
     @text = priobit + @text.replace @priority_regex, ''
     @
 
+  prepend: (text) ->
+    parts = @text.match(@priority_regex)[1..]
+    @text = parts[0] + " " + text + " " + @text.replace(@priority_regex, '')
+    @
 
-class Model
+exports.Model = class Model
   constructor: ->
     @todos = []
 
@@ -34,5 +38,3 @@ class Model
   add: (item) ->
     @todos.push item
 
-exports.Model = Model
-exports.Todo = Todo
