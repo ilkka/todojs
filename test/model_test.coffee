@@ -32,6 +32,12 @@ vows
       'has the priority prepended in parentheses': (topic) ->
         assert.equal topic.text, '(A) foobar'
 
+    'a todo with a priority that is marked as done':
+      topic: new todo.Todo('(A) foobar').do()
+
+      'has the priority removed': (topic) ->
+        assert.equal topic.text, 'x foobar'
+
     'a todo with the priority set to null':
       topic: new todo.Todo('(A) foobar').set_priority(null)
 
