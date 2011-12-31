@@ -50,6 +50,12 @@ vows
       'has the text inserted after the priority': (topic) ->
         assert.equal topic.text, '(A) baz baz foobar'
 
+    'a todo with some text appended to it':
+      topic: new todo.Todo('(A) foobar').append('lur lur')
+
+      'has the text inserted at the end': (topic) ->
+        assert.equal topic.text, '(A) foobar lur lur'
+
   .addBatch
     'an empty todo model':
       topic: new todo.Model

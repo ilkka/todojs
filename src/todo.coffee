@@ -25,6 +25,10 @@ exports.Todo = class Todo
     @text = parts[0] + " " + text + " " + @text.replace(@priority_regex, '')
     @
 
+  append: (text) ->
+    @text = @text + " " + text
+    @
+
 exports.Model = class Model
   constructor: ->
     @todos = []
