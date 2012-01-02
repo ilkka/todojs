@@ -3,9 +3,9 @@ assert = require 'assert'
 todo = require '../lib/todo'
 
 vows
-  .describe('a model')
+  .describe('model')
   .addBatch
-    'a todo item':
+    'a newly created todo':
       topic: new todo.Todo('foobar')
 
       'has a text attribute': (topic) ->
@@ -62,7 +62,6 @@ vows
       'has the text inserted at the end': (topic) ->
         assert.equal topic.text, '(A) foobar lur lur'
 
-  .addBatch
     'an empty todo model':
       topic: new todo.Model
       
