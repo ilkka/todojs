@@ -41,4 +41,4 @@ exports.Model = class Model
 
   add: (item) ->
     @todos.push item
-
+    @
