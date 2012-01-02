@@ -1,6 +1,7 @@
 vows = require 'vows'
 assert = require 'assert'
 model = require '../lib/model'
+util = require 'util'
 
 vows
   .describe('model')
@@ -85,5 +86,14 @@ vows
 
       'returns an error when accessing past the end': (topic) ->
         assert.equal topic.by_id(1) instanceof Error, true
+
+    'with a few elements':
+      topic: new model.Model()
+        .add(new model.Todo("foo"))
+        .add(new model.Todo("bar"))
+        .add(new model.Todo("baz"))
+
+      'can be iterated to yield the elements in order': (mdl) ->
+        assert.deepEqual(mdl.by_id(i).text for i in [0..2], ['foo', 'bar', 'baz'])
 
   .export(module)

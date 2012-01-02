@@ -1,12 +1,13 @@
+priority_regex = /^(\([A-Z]\))\s+/
+
 exports.Todo = class Todo
   constructor: (text) ->
     @done = false
     @text = text
-    @priority_regex = /^(\([A-Z]\))\s+/
 
   do: ->
     @done = true
-    @text = 'x ' + @text.replace @priority_regex, ""
+    @text = 'x ' + @text.replace priority_regex, ""
     @
 
   undo: ->
@@ -17,12 +18,12 @@ exports.Todo = class Todo
   set_priority: (priority) ->
     return new Error('Done items cannot be prioritized') if @done
     priobit =  if priority? then '(' + priority + ') ' else ''
-    @text = priobit + @text.replace @priority_regex, ''
+    @text = priobit + @text.replace priority_regex, ''
     @
 
   prepend: (text) ->
-    parts = @text.match(@priority_regex)[1..]
-    @text = parts[0] + " " + text + " " + @text.replace(@priority_regex, '')
+    parts = @text.match(priority_regex)[1..]
+    @text = parts[0] + " " + text + " " + @text.replace(priority_regex, '')
     @
 
   append: (text) ->
