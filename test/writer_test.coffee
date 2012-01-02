@@ -39,7 +39,6 @@ vows
 
         'the file should contain the todos in order': (err, fp) ->
           assert.isFalse util.isError(err)
-          util.debug util.format("Reading from %s", fp)
           data = fs.readFileSync(fp, 'utf-8')
           assert.isFalse util.isError(data)
           assert.equal data, "(A) first\n(D) second +proj @ctx\n(B) @ctx third"
