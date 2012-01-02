@@ -20,6 +20,7 @@
 	  "optimist": "~0.3.0"
   },
   "devDependencies": {
-	  "vows": "~0.6.1"
+	  "vows": "~0.6.1",
+	  "temp": "~0.4.0"
   }
 }
