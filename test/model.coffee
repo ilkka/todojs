@@ -1,12 +1,12 @@
 vows = require 'vows'
 assert = require 'assert'
-todo = require '../lib/todo'
+model = require '../lib/model'
 
 vows
   .describe('model')
   .addBatch
     'a newly created todo':
-      topic: new todo.Todo('foobar')
+      topic: new model.Todo('foobar')
 
       'has a text attribute': (topic) ->
         assert.equal topic.text, 'foobar'
@@ -15,55 +15,55 @@ vows
         assert.equal topic.done, false
 
     'a todo that is marked as done':
-      topic: new todo.Todo('foobar').do()
+      topic: new model.Todo('foobar').do()
 
       'has an x prepended to it': (topic) ->
         assert.equal topic.text, 'x foobar'
 
     'a todo that is marked as undone':
-      topic: new todo.Todo('x foobar').undo()
+      topic: new model.Todo('x foobar').undo()
 
       'has the x removed': (topic) ->
         assert.equal topic.text, 'foobar'
 
     'a todo with a priority':
-      topic: new todo.Todo('foobar').set_priority('A')
+      topic: new model.Todo('foobar').set_priority('A')
 
       'has the priority prepended in parentheses': (topic) ->
         assert.equal topic.text, '(A) foobar'
 
     'a todo with a priority that is marked as done':
-      topic: new todo.Todo('(A) foobar').do()
+      topic: new model.Todo('(A) foobar').do()
 
       'has the priority removed': (topic) ->
         assert.equal topic.text, 'x foobar'
 
     'a todo with the priority set to null':
-      topic: new todo.Todo('(A) foobar').set_priority(null)
+      topic: new model.Todo('(A) foobar').set_priority(null)
 
       "doesn't have the parentheses": (topic) ->
         assert.equal topic.text, 'foobar'
 
     'a todo with the priority changed':
-      topic: new todo.Todo('(A) foobar').set_priority('B')
+      topic: new model.Todo('(A) foobar').set_priority('B')
 
       'has the new priority in the text': (topic) ->
         assert.equal topic.text, '(B) foobar'
 
     'a todo with some text prepended to it':
-      topic: new todo.Todo('(A) foobar').prepend('baz baz')
+      topic: new model.Todo('(A) foobar').prepend('baz baz')
 
       'has the text inserted after the priority': (topic) ->
         assert.equal topic.text, '(A) baz baz foobar'
 
     'a todo with some text appended to it':
-      topic: new todo.Todo('(A) foobar').append('lur lur')
+      topic: new model.Todo('(A) foobar').append('lur lur')
 
       'has the text inserted at the end': (topic) ->
         assert.equal topic.text, '(A) foobar lur lur'
 
     'an empty todo model':
-      topic: new todo.Model
+      topic: new model.Model
       
       'has a length of zero': (topic) ->
         assert.equal topic.length(), 0
@@ -73,8 +73,8 @@ vows
 
     'with one element':
       topic: ->
-        m = new todo.Model
-        m.add(new todo.Todo('foobar'))
+        m = new model.Model
+        m.add(new model.Todo('foobar'))
         m
 
       'has a length of one': (topic) ->
