@@ -26,7 +26,7 @@ vows
           assert.isNull err
           throw err if util.isError(err)
           assert.instanceOf mdl, Model
-          assert.equal mdl.length(), 0
+          assert.equal mdl.length, 0
 
       'but when one todo is added':
         topic: (tempdir) ->
@@ -35,7 +35,7 @@ vows
           reader.read filepath, this.callback
 
         'the model has one todo': (err, mdl) ->
-          assert.equal mdl.length(), 1
+          assert.equal mdl.length, 1
 
         'and the todo is exactly like in the file': (err, mdl) ->
           assert.equal mdl.by_id(0).text, '(C) A test todo +project1 @context2'

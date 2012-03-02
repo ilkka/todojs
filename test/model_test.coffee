@@ -11,7 +11,7 @@ vows
       topic: new Model
       
       'has a length of zero': (topic) ->
-        assert.equal topic.length(), 0
+        assert.equal topic.length, 0
 
       'returns an error when accessing elements': (topic) ->
         assert.equal topic.by_id(0) instanceof Error, true
@@ -23,7 +23,7 @@ vows
         m
 
       'has a length of one': (topic) ->
-        assert.equal topic.length(), 1
+        assert.equal topic.length, 1
 
       'returns the element when accessing it': (topic) ->
         assert.equal topic.by_id(0).text, 'foobar'
