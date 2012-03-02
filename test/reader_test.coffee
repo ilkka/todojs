@@ -5,7 +5,7 @@ fs = require 'fs'
 util = require 'util'
 path = require 'path'
 reader = require '../lib/reader'
-model = require '../lib/model'
+Model = require '../lib/model'
 
 vows
   .describe('the todo reader')
@@ -25,7 +25,7 @@ vows
         'the resulting model is empty': (err, mdl) ->
           assert.isNull err
           throw err if util.isError(err)
-          assert.instanceOf mdl, model.Model
+          assert.instanceOf mdl, Model
           assert.equal mdl.length(), 0
 
       'but when one todo is added':

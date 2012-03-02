@@ -4,7 +4,8 @@ temp = require 'temp'
 fs = require 'fs'
 util = require 'util'
 path = require 'path'
-model = require '../lib/model'
+Model = require '../lib/model'
+Todo = require '../lib/todo'
 writer = require '../lib/writer'
 
 vows
@@ -19,7 +20,7 @@ vows
       'when we write an empty model':
         topic: (tempdir) ->
           fp = path.join tempdir, 'empty_model.txt'
-          m = new model.Model
+          m = new Model
           writer.write m, fp, (err) =>
             this.callback err, fp
 
@@ -30,8 +31,8 @@ vows
       'when some todos are added':
         topic: (tempdir) ->
           fp = path.join tempdir, 'todos.txt'
-          m = new model.Model()
-          m.add(new model.Todo(t)) for t in [
+          m = new Model()
+          m.add(new Todo(t)) for t in [
             '(A) first', '(D) second +proj @ctx', '(B) @ctx third'
           ]
           writer.write m, fp, (err) =>
