@@ -16,11 +16,17 @@ vows
         ]
         m
 
+      'the original model should have 3 items': (model) ->
+        assert.equal model.length, 3
+
       'when filtering by a word':
-        topic: (m) ->
-          new Filter(m, 'first')
+        topic: (model) ->
+          new Filter(model, 'first')
 
         'it should have a length': (filter) ->
           assert.notEqual typeof filter.length, "undefined"
+
+        'the length should be the number of matched todos': (filter) ->
+          assert.equal filter.length, 1
 
   .export(module)
