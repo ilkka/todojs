@@ -18,15 +18,14 @@ build = (watch, callback) ->
   coffee.stderr.on 'data', (data) -> log data.toString()
   coffee.on 'exit', (status) -> callback?() if status is 0
 
-spec = (callback) ->
-  options = ['spec', '--coffee']
-  spec = spawn 'jasmine-node', options
-  coffee.stdout.on 'data', (data) -> print data.toString()
-  coffee.stderr.on 'data', (data) -> log data.toString()
-  coffee.on 'exit', (status) -> callback?() if status is 0
+test = (callback) ->
+  spec = spawn 'vows', []
+  spec.stdout.on 'data', (data) -> print data.toString()
+  spec.stderr.on 'data', (data) -> log data.toString()
+  spec.on 'exit', (status) -> callback?() if status is 0
 
 task 'build', ->
   build -> log ":)"
 
-task 'spec', 'Run Jasmine-Node', ->
-  build -> spec -> log ':)'
+task 'spec', 'Run tests', ->
+  build -> test -> log ':)'
