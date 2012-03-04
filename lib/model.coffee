@@ -2,14 +2,20 @@ class Model
   constructor: ->
     @todos = []
     @length = 0
+    @nextId = 1
 
   byId: (id) ->
-    return new Error("Element not in model") if id >= @length or id < 0
-    return @todos[id]
+    result = null
+    @todos.forEach (t) ->
+      if t.id is id
+        result = t
+    if result
+      return result
+    return new Error("Not found")
 
   add: (item) ->
-    @todos.push item
-    @length++
+    item.id = @nextId++
+    @length = @todos.push(item)
     @
 
 module.exports = Model
