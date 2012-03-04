@@ -34,6 +34,6 @@ vows
           new Filter(model, '@ctx')
 
         'the IDs should be preserved': (filter) ->
-          assert.equal filter.byId(1).text, '(D) second +proj @ctx'
+          assert.equal filter.byId(2).text, '(D) second +proj @ctx'
 
   .export(module)
