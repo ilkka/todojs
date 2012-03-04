@@ -3,6 +3,7 @@ priority_regex = /^(\([A-Z]\))\s+/
 class Todo
   constructor: (text) ->
     @done = false
+    @id = null
     @text = text
 
   do: ->
