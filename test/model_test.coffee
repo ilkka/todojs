@@ -14,7 +14,7 @@ vows
         assert.equal topic.length, 0
 
       'returns an error when accessing elements': (topic) ->
-        assert.equal topic.by_id(0) instanceof Error, true
+        assert.equal topic.byId(0) instanceof Error, true
 
     'with one element':
       topic: ->
@@ -26,10 +26,10 @@ vows
         assert.equal topic.length, 1
 
       'returns the element when accessing it': (topic) ->
-        assert.equal topic.by_id(0).text, 'foobar'
+        assert.equal topic.byId(0).text, 'foobar'
 
       'returns an error when accessing past the end': (topic) ->
-        assert.equal topic.by_id(1) instanceof Error, true
+        assert.equal topic.byId(1) instanceof Error, true
 
     'with a few elements':
       topic: new Model()
@@ -38,6 +38,6 @@ vows
         .add(new Todo("baz"))
 
       'can be iterated to yield the elements in order': (mdl) ->
-        assert.deepEqual(mdl.by_id(i).text for i in [0..2], ['foo', 'bar', 'baz'])
+        assert.deepEqual(mdl.byId(i).text for i in [0..2], ['foo', 'bar', 'baz'])
 
   .export(module)
