@@ -6,5 +6,4 @@ class Filter extends Model
     @todos = model.todos.filter (t) -> keywords.some((kw) -> t.text.match(///#{kw}///))
     @length = @todos.length
 
-
 module.exports = Filter
