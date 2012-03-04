@@ -1,4 +1,4 @@
-Model = class Model
+class Model
   constructor: ->
     @todos = []
     @length = 0
