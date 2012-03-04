@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+# vim: filetype=coffee
+program = require 'commander'
+Model = require '../lib/model'
+Todo = require '../lib/todo'
+
+program
+  .version('0.0.1')
+
+program
+  .command('ls')
+  .description('List todos')
+  .action(() ->
+    m = new Model()
+    m.add(new Todo('eka'))
+    m.add(new Todo('toka'))
+    m.add(new Todo('kolmas'))
+    console.log m.map((t) -> t.text).join("\n")
+  )
+
+program.parse process.argv
