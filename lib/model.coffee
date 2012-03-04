@@ -18,4 +18,7 @@ class Model
     @length = @todos.push(item)
     @
 
+  map: (callback) ->
+    @todos.map (t) -> callback(t)
+
 module.exports = Model

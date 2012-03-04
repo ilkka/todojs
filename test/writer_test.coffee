@@ -26,7 +26,7 @@ vows
 
         'the file should be empty': (err, fp) ->
           assert.isFalse util.isError(err)
-          assert.equal fs.readFileSync(fp, 'utf-8'), "\n"
+          assert.equal fs.readFileSync(fp, 'utf-8'), ""
 
       'when some todos are added':
         topic: (tempdir) ->
