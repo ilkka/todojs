@@ -1,7 +1,10 @@
 # filter coffee, har de har
-class Filter
+Model = require './model'
+
+class Filter extends Model
   constructor: (model, keywords...) ->
-    @items = model.todos.filter (t) -> keywords.some((kw) -> t.text.match(///#{kw}///))
-    @length = @items.length
+    @todos = model.todos.filter (t) -> keywords.some((kw) -> t.text.match(///#{kw}///))
+    @length = @todos.length
+
 
 module.exports = Filter

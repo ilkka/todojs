@@ -29,4 +29,11 @@ vows
         'the length should be the number of matched todos': (filter) ->
           assert.equal filter.length, 1
 
+      'when filtering so that there are gaps':
+        topic: (model) ->
+          new Filter(model, '@ctx')
+
+        'the IDs should be preserved': (filter) ->
+          assert.equal filter.byId(1).text, '(D) second +proj @ctx'
+
   .export(module)
