@@ -38,7 +38,7 @@ vows
           assert.equal mdl.length, 1
 
         'and the todo is exactly like in the file': (err, mdl) ->
-          assert.equal mdl.byId(0).text, '(C) A test todo +project1 @context2'
+          assert.equal mdl.byId(1).text, '(C) A test todo +project1 @context2'
 
       'if a non-existing file is read':
         topic: (tempdir) ->
