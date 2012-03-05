@@ -12,6 +12,10 @@ run = (args, callback) ->
   execFile(scriptfile, args, {cwd: __dirname + '/../bin'}, callback)
   return
 
+todofilecontents = """(A) my most important todo @ctx
+(B) another todo +project
+Third todo +project @ctx"""
+
 vows
   .describe('the CLI')
   .addBatch
@@ -19,20 +23,27 @@ vows
       topic: ->
         temp.mkdir('todojs', @callback)
 
-      'and a todo file with one todo':
+      'and a todo file with some todos':
         topic: (dir) ->
           filename = path.join(dir, 'todo.txt')
-          fs.writeFileSync(filename, '(A) my only todo @ctx')
+          fs.writeFileSync(filename, todofilecontents)
           filename
 
         'when listing todos':
           topic: (filename) ->
             run(['-f', filename, 'ls'], @callback)
 
-          'should exit with code zero': (err, stdout, stderr) ->
+          'exits with code zero': (err, stdout, stderr) ->
             assert.isNull err
 
-          'should output the todos': (err, stdout, stderr) ->
-            assert.equal stdout, "(A) my only todo @ctx\n"
+          'prints the todos to stdout': (err, stdout, stderr) ->
+            assert.equal stdout, todofilecontents + "\n"
+
+        'when listing todos with a keyword':
+          topic: (filename) ->
+            run ['-f', filename, 'ls', '@ctx'], @callback
+
+          'prints only those todos that have the keyword': (err, stdout, stderr) ->
+            assert.equal stdout, "(A) my most important todo @ctx\nThird todo +project @ctx\m"
 
   .export(module)
