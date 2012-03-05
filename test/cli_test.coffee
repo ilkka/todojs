@@ -21,11 +21,13 @@ vows
 
       'and a todo file with one todo':
         topic: (dir) ->
-          fs.writeFile(path.join(dir, 'todo.txt'), '(A) my only todo @ctx', @callback)
+          filename = path.join(dir, 'todo.txt')
+          fs.writeFileSync(filename, '(A) my only todo @ctx')
+          filename
 
         'when listing todos':
-          topic: (todofile) ->
-            run(['-f', todofile, 'ls'], @callback)
+          topic: (filename) ->
+            run(['-f', filename, 'ls'], @callback)
 
           'should exit with code zero': (err, stdout, stderr) ->
             assert.isNull err
