@@ -3,19 +3,19 @@
 program = require 'commander'
 Model = require '../lib/model'
 Todo = require '../lib/todo'
+reader = require '../lib/reader'
 
 program
   .version('0.0.1')
+  .usage('[options] <command> [args]')
+  .option('-f, --todofile <F>', 'Path to todo file', 'todo.txt')
 
 program
   .command('ls')
   .description('List todos')
   .action(() ->
-    m = new Model()
-    m.add(new Todo('eka'))
-    m.add(new Todo('toka'))
-    m.add(new Todo('kolmas'))
-    console.log m.map((t) -> t.text).join("\n")
+    reader.read @todofile, (err, mdl) ->
+      console.log mdl.map((t) -> t.text).join("\n")
   )
 
 program.parse process.argv

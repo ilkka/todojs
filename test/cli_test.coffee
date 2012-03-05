@@ -33,6 +33,6 @@ vows
             assert.isNull err
 
           'should output the todos': (err, stdout, stderr) ->
-            assert.equal stdout, "eka\ntoka\nkolmas\n"
+            assert.equal stdout, "(A) my only todo @ctx\n"
 
   .export(module)
