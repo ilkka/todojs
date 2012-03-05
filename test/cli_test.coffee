@@ -44,6 +44,6 @@ vows
             run ['-f', filename, 'ls', '@ctx'], @callback
 
           'prints only those todos that have the keyword': (err, stdout, stderr) ->
-            assert.equal stdout, "(A) my most important todo @ctx\nThird todo +project @ctx\m"
+            assert.equal stdout, "(A) my most important todo @ctx\nThird todo +project @ctx\n"
 
   .export(module)

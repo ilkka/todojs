@@ -3,7 +3,9 @@
 program = require 'commander'
 Model = require '../lib/model'
 Todo = require '../lib/todo'
+Filter = require '../lib/filter'
 reader = require '../lib/reader'
+util = require 'util'
 
 program
   .version('0.0.1')
@@ -12,9 +14,11 @@ program
 
 program
   .command('ls')
-  .description('List todos')
-  .action(() ->
+  .description('List todos. Any args are keywords for todo search.')
+  .action((keywords...) ->
+    keywords.pop() # some data structure as last element, we don't need it
     reader.read @todofile, (err, mdl) ->
+      mdl = keywords.reduce ((prev, cur, i, ary) -> new Filter(prev, cur)), mdl
       console.log mdl.map((t) -> t.text).join("\n")
   )
 
